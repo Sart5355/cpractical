@@ -1,0 +1,299 @@
+#include <stdio.h>
+int main() {
+char str[100];
+int length = 0, totalCharacters = 0, totalVowels = 0, i = 0;
+
+// Get user input
+printf("enter any string....");
+scanf("%s",str);
+for (i=0 ;str[i]!='\0';i++)
+{
+length = length + 1;
+}
+printf("%d",length);
+
+// Calculate total number of characters and vowels
+for (int i = 0; i < length; i++) {
+totalCharacters++;
+if (str[i] == 'a' || str[i] == 'e' || str[i] == 'i' || str[i] == 'o' || str[i] == 'u' ||
+str[i] == 'A' || str[i] == 'E' || str[i] == 'I' || str[i] == 'O' || str[i] == 'U') {
+totalVowels++;
+}
+}
+// Copy one string into the other
+char copiedStr[100];
+for (int i = 0; i < length; i++) {
+copiedStr[i] = str[i];
+}
+// Reverse the string
+char reversedStr[100];
+int j = 0;
+for (int i = length - 1; i >= 0; i--) {
+reversedStr[j] = str[i];
+j++;
+}
+printf("Length of the string: %d\n", length);
+printf("Total number of characters: %d\n", totalCharacters);
+printf("Total number of vowels: %d\n", totalVowels);
+printf("Copied string: %s\n", copiedStr);
+printf("Reversed string: %s\n", reversedStr);
+}
+
+EXP 6
+#include <stdio.h>
+#include <string.h>
+
+// Function to compare two strings
+void compareStrings(char *str1, char *str2) {
+int i = 0;
+while(str1[i] != '\0' && str2[i] != '\0') {
+if(str1[i] != str2[i]) {
+printf("Strings are not equal\n");
+return;
+}
+i++;
+}
+
+if(str1[i] != '\0' || str2[i] != '\0')
+printf("Strings are not equal\n");
+else
+printf("Strings are equal\n");
+}
+
+// Function to find the longer string
+void findLongerString(char *str1, char *str2) {
+int i = 0;
+while(str1[i] != '\0' && str2[i] != '\0') i++;
+if(str1[i] == '\0')
+printf("String 2 is longer\n");
+else if(str2[i] == '\0')
+printf("String 1 is longer\n");
+else
+printf("Both strings are of the same length\n");
+}
+
+// Function to concatenate two strings
+void concatenateStrings(char *str1, char *str2) {
+int i = 0, j = 0;
+while(str1[i] != '\0') i++;
+while(str2[j] != '\0') {
+str1[i++] = str2[j++];
+}
+str1[i] = '\0';
+
+}
+
+// Function to find the occurrence of a substring in the main string
+void findSubstringOccurrence(char *str, char *sub) {
+int count = 0, i = 0, j = 0;
+while(str[i] != '\0') {
+if(str[i] == sub[j]) {
+int k = i;
+while(sub[j] != '\0' && str[k] != '\0' && str[k] == sub[j]) {
+k++;
+j++;
+}
+if(sub[j] == '\0') {
+count++;
+j = 0;
+}
+else {
+i++;
+j = 0;
+}
+}
+else
+i++;
+}
+printf("Occurrence of substring: %d\n", count);
+}
+
+// Function to check if the string is a palindrome
+void checkPalindrome(char *str) {
+int i = 0, j = 0;
+while(str[j] != '\0') j++;
+j--;
+while(i < j) {
+if(str[i] != str[j]) {
+printf("Not a palindrome\n");
+return;
+}
+i++;
+j--;
+}
+printf("Palindrome\n");
+}
+
+int main() {
+char str1[100], str2[100], sub[50];
+printf("Enter first string: ");
+fgets(str1, sizeof(str1), stdin);
+str1[strlen(str1)-1] = '\0'; // remove newline character
+printf("Enter second string: ");
+fgets(str2, sizeof(str2), stdin);
+str2[strlen(str2)-1] = '\0'; // remove newline character
+compareStrings(str1, str2);
+
+findLongerString(str1, str2);
+concatenateStrings(str1, str2);
+printf("Concatenated string: %s\n", str1);
+printf("Enter substring to find: ");
+fgets(sub, sizeof(sub), stdin);
+sub[strlen(sub)-1] = '\0'; // remove newline character
+findSubstringOccurrence(str1, sub);
+checkPalindrome(str2);
+return 0;
+}
+
+EXP 4 
+#include <stdio.h>
+
+void matrixAddition(int m, int n, int mat1[][n], int mat2[][n], int result[][n]) {
+    for (int i = 0; i < m; ++i) {
+        for (int j = 0; j < n; ++j) {
+            result[i][j] = mat1[i][j] + mat2[i][j];
+        }
+    }
+}
+
+void matrixSubtraction(int m, int n, int mat1[][n], int mat2[][n], int result[][n]) {
+    for (int i = 0; i < m; ++i) {
+        for (int j = 0; j < n; ++j) {
+            result[i][j] = mat1[i][j] - mat2[i][j];
+        }
+    }
+}
+
+void matrixTranspose(int m, int n, int mat[][n], int result[][m]) {
+    for (int i = 0; i < m; ++i) {
+        for (int j = 0; j < n; ++j) {
+            result[j][i] = mat[i][j];
+        }
+    }
+}
+
+void displayMatrix(int m, int n, int mat[][n]) {
+    for (int i = 0; i < m; ++i) {
+        for (int j = 0; j < n; ++j) {
+            printf("%d\t", mat[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int m, n;
+
+    printf("Enter the number of rows and columns of the matrix: ");
+    scanf("%d %d", &m, &n);
+
+    int matrix1[m][n], matrix2[m][n], result[m][n], transpose[n][m];
+
+    printf("Enter elements of matrix 1:\n");
+    for (int i = 0; i < m; ++i) {
+        for (int j = 0; j < n; ++j) {
+            scanf("%d", &matrix1[i][j]);
+        }
+    }
+
+    printf("Enter elements of matrix 2:\n");
+    for (int i = 0; i < m; ++i) {
+        for (int j = 0; j < n; ++j) {
+            scanf("%d", &matrix2[i][j]);
+        }
+    }
+
+    printf("Matrix 1:\n");
+    displayMatrix(m, n, matrix1);
+
+    printf("Matrix 2:\n");
+    displayMatrix(m, n, matrix2);
+
+    // Addition
+    matrixAddition(m, n, matrix1, matrix2, result);
+    printf("Addition:\n");
+    displayMatrix(m, n, result);
+
+    // Subtraction
+    matrixSubtraction(m, n, matrix1, matrix2, result);
+    printf("Subtraction:\n");
+    displayMatrix(m, n, result);
+
+    // Transpose of Matrix 1
+    matrixTranspose(m, n, matrix1, transpose);
+    printf("Transpose of Matrix 1:\n");
+    displayMatrix(n, m, transpose);
+
+    // Transpose of Matrix 2
+    matrixTranspose(m, n, matrix2, transpose);
+    printf("Transpose of Matrix 2:\n");
+    displayMatrix(n, m, transpose);
+
+    return 0;
+}
+
+EXP 1 
+b 
+#include<stdio.h>
+int main()
+{
+
+    char upper,lower;
+    int ascii;
+    
+    
+    printf("Enter the Upper Case character : ");
+    scanf("%c",&upper);
+    ascii = upper + 32;
+    printf(" %c Character in the lower case is : %c",upper,ascii);
+    
+    
+    getchar();
+    
+    printf("\n Enter the Lower Case character : ");
+    scanf("%c",&lower);
+    ascii = lower - 32;
+    printf(" %c Character in the Upper case is : %c",lower,ascii);
+    
+    
+    return 0;
+
+
+}
+a
+
+#include <stdio.h>
+#include <math.h>
+int main() 
+{
+    double a, b, c, discriminant, root1, root2;
+    printf("Enter coefficients a, b and c: ");
+    scanf("%lf %lf %lf", &a, &b, &c);
+
+    discriminant = b * b - 4 * a * c;
+
+    
+    if (discriminant > 0) 
+	{
+        root1 = (-b + sqrt(discriminant)) / (2 * a);
+        root2 = (-b - sqrt(discriminant)) / (2 * a);
+        printf("root1 = %.2lf and root2 = %.2lf", root1, root2);
+    }
+
+    
+    else if (discriminant == 0)
+	{
+        root1 = root2 = -b / (2 * a);
+        printf("root1 = root2 = %.2lf;", root1);
+    }
+
+    
+    else 
+	{
+        double realPart = -b / (2 * a);
+        double imagPart = sqrt(-discriminant) / (2 * a);
+        printf("root1 = %.2lf+%.2lfi and root2 = %.2f-%.2fi", realPart, imagPart, realPart, imagPart);
+    }
+
+    return 0;
+} 
