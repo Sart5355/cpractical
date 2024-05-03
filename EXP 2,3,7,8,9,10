@@ -1,0 +1,317 @@
+exp 2
+#include <stdio.h>
+int main(){
+    int n, i, flag = 0,guess,num;;
+    printf("enter what you wanna do \n1. to check if number is prime or not \n2. to check if number is odd or even");
+    scanf("%d",&guess);
+    switch(guess){
+        case 1:
+        printf("Enter a positive integer: ");
+        scanf("%d", &n);
+        if (n == 0 || n == 1)
+           flag = 1;
+
+        for (i = 2; i <= n / 2; ++i) {
+        if (n % i == 0) {
+         flag = 1;
+         break;
+       }
+  }
+     if (flag == 0)
+     printf("%d is a prime number.", n);
+      else
+    printf("%d is not a prime number.", n);
+    break;
+    case 2:
+    printf("to check if number is even or odd enter a number");
+    scanf("%d", &num);
+    if(num % 2 == 0)
+        printf("%d is even.", num);
+    else
+        printf("%d is odd.", num);
+
+    }
+   
+ 
+  return 0;
+}
+EXP3
+a
+#include <stdio.h>
+
+int main() {
+    int t1 = 0, t2 = 1, n, i, nextterm;
+    printf("ENTER THE NUMBER OF TERMS: ");
+    scanf("%d", &n);
+    printf("%d %d", t1, t2);
+
+    for (i = 3; i <= n; i++) {
+        nextterm = t1 + t2;
+        printf(" %d" ,nextterm);
+        t1 = t2;
+        t2 = nextterm;
+    }
+
+    return 0;
+}
+b
+#include <stdio.h>
+#include <math.h>
+int main()
+{
+    int num , c , i ;
+    
+    float a;
+    printf("how do you want to find square root ? \n type 1 for sqrt function. \n type 2 for pow function. \n type 3 for log function .\n type 4 for while loop \n");
+    scanf("%d",&c);
+    printf("what number to find the square root?");
+    scanf("%d",&num);
+    switch(c)
+    {
+        case 1 :
+        a = sqrt(num);
+        printf("%f",a);
+        break;
+
+        case 2 :
+        a = pow(num,0.5);
+        printf("%f",a);
+        break ;
+         
+        case 3:
+        a = pow(2,0.5 * log2(num));
+        printf("%f",a);
+        break;
+
+        
+        case 4:
+        
+        i = 0; // Initialize i before using it in the loop
+        while (i < num * 0.5)
+       {
+        if (i * i == num)
+        {
+            printf("%d", i);
+        }
+        i++; // Increment i in each iteration
+    }
+    break;
+
+
+        default :
+        printf("no");
+        break;
+
+
+
+    }
+}
+
+
+
+
+EXP 4 
+EXP 7
+a
+#include<stdio.h>
+long int multiplynum(int n);
+int main() {
+int n;
+printf("Enter a positive integer: ");
+scanf("%d",&n);
+printf("Factorial of %d = %ld", n, multiplynum(n));
+return 0;
+}
+
+long int multiplynum(int n) {
+if (n>=1)
+return n*multiplynum(n-1);
+else
+return 1;
+}
+b
+#include <stdio.h>
+
+float squareRoot(float num, float guess) {
+float new_guess = (guess + num / guess) / 2;
+if (guess - new_guess < 0.0001) {
+return new_guess;
+} else {
+return squareRoot(num, new_guess);
+}
+}
+
+int main() {
+float num;
+printf("Enter a number: ");
+scanf("%f", &num);
+if (num < 0) {
+printf("Cannot calculate square root of a negative number.\n");
+} else {
+printf("Square root of %.2f is approximately %.4f\n", num, squareRoot(num, num / 2));
+}
+return 0;
+}
+EXP 8 
+a
+#include<stdio.h>
+
+void bubble_sort(int arr[], int n){
+for (int i = 0; i < n - 1; i++) {
+for (int j = 0; j < n - i - 1; j++) {
+if (arr[j] > arr[j + 1]) {
+int temp = arr[j];
+arr[j] = arr[j + 1];
+arr[j + 1] = temp;
+}
+}
+}
+
+}
+
+int main(){
+int n;
+printf("enter number of elements: ");
+scanf("%d", &n);
+int arr[n];
+printf("enter the elements \n");
+for(int i=0;i<n;i++){
+scanf("%d", &arr[i]);
+}
+bubble_sort(arr,n);
+for(int i=0;i<n;i++){
+printf("%d ", arr[i]);
+}
+}
+b
+#include <stdio.h>
+void selectionSort(int arr[], int n) {
+int i, j, min_index, temp;
+for (i = 0; i < n - 1; i++) {
+// Find the minimum element in unsorted array
+min_index = i;
+for (j = i + 1; j < n; j++) {
+if (arr[j] < arr[min_index]) {
+min_index = j;
+}
+}
+// Swap the minimum element with the current element
+temp = arr[i];
+arr[i] = arr[min_index];
+arr[min_index] = temp;
+}
+}
+void printArray(int arr[], int n) {
+int i;
+for (i = 0; i < n; i++) {
+printf("%d ", arr[i]);
+}
+printf("\n");
+}
+int main() {
+int arr[100], n, i;
+
+printf("Enter the number of elements: ");
+scanf("%d", &n);
+printf("Enter %d integers: ", n);
+for (i = 0; i < n; i++) {
+scanf("%d", &arr[i]);
+}
+selectionSort(arr, n);
+printf("Sorted array in ascending order: ");
+printArray(arr, n);
+
+return 0;
+}
+EXP 9
+#include <stdio.h>
+int binarySearch(int array[], int x, int low, int high) {
+while (low <= high) {
+int mid = low + (high - low) / 2;
+if (array[mid] == x)
+return mid;
+if (array[mid] < x)
+low = mid + 1;
+else
+high = mid - 1;
+}
+return -1;
+}
+int main(void) {
+int array[] = {3, 4, 5, 6, 7, 8, 9};
+int n = sizeof(array) / sizeof(array[0]);
+int x;
+printf("Enter the element to be searched: ");
+scanf("%d", &x);
+int result = binarySearch(array, x, 0, n - 1);
+if (result == -1)
+
+printf("Not found");
+else
+printf("Element is found at index %d", result);
+return 0;
+}
+EXP 10
+#include <stdio.h>
+
+
+struct Employee {// Define a structure to represent an employee
+    int id;
+    char name[50];
+    char designation[50];
+    char department[50];
+    float basicSalary;
+};
+
+// Function to print the pay slip of an employee
+void printPaySlip(struct Employee emp) {
+    // Calculate allowance and deduction percentages
+    float allowancePercentage = 0.10; // 10% allowance
+    float deductionPercentage = 0.05; // 5% deduction
+    
+    // Calculate allowance and deduction amounts
+    float allowance = emp.basicSalary * allowancePercentage;
+    float deduction = emp.basicSalary * deductionPercentage;
+    
+    // Calculate gross and net salary
+    float grossSalary = emp.basicSalary + allowance;
+    float netSalary = grossSalary - deduction;
+    
+    // Print pay slip
+    printf("\nPay Slip:\n");
+    printf("Employee ID: %d\n", emp.id);
+    printf("Name: %s\n", emp.name);
+    printf("Designation: %s\n", emp.designation);
+    printf("Department: %s\n", emp.department);
+    printf("Basic Salary: %.2f\n", emp.basicSalary);
+    printf("Allowance: %.2f\n", allowance);
+    printf("Deduction: %.2f\n", deduction);
+    printf("Gross Salary: %.2f\n", grossSalary);
+    printf("Net Salary: %.2f\n", netSalary);
+}
+
+int main() {
+    // Declare an employee structure variable
+    struct Employee emp;
+
+    // Accept details of the employee
+    printf("Enter Employee ID: ");
+    scanf("%d", &emp.id);
+    
+    printf("Enter Name: ");
+    scanf("%s", emp.name); // Assuming the name doesn't contain spaces
+    
+    printf("Enter Designation: ");
+    scanf("%s", emp.designation); // Assuming the designation doesn't contain spaces
+    
+    printf("Enter Department: ");
+    scanf("%s", emp.department); // Assuming the department doesn't contain spaces
+    
+    printf("Enter Basic Salary: ");
+    scanf("%f", &emp.basicSalary);
+
+    // Print the pay slip of the employee
+    printPaySlip(emp);
+
+    return 0;
+}
